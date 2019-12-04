@@ -70,7 +70,7 @@
                 <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iHW-15-uRa">
                     <rect key="frame" x="132" y="204" width="266" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="cRP-Hv-sAJ">
+                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="cRP-Hv-sAJ">
                         <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -83,5 +83,10 @@
             <point key="canvasLocation" x="140" y="154"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="aZ7-kg-gTv"/>
+        <viewController id="mgH-g6-S0g" customClass="PlaybackViewController">
+            <connections>
+                <outlet property="view" destination="c22-O7-iKe" id="6XB-gd-jmF"/>
+            </connections>
+        </viewController>
     </objects>
 </document>

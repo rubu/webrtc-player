@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A602726723966B6F009D6D49 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A602726623966B6F009D6D49 /* AppDelegate.m */; };
+		172EF669871BF11C4DA18098 /* Pods_WebRTC_Player.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E8AD4D929D873B7469B80D /* Pods_WebRTC_Player.framework */; };
+		A602726723966B6F009D6D49 /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A602726623966B6F009D6D49 /* ApplicationDelegate.m */; };
 		A602726923966B71009D6D49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A602726823966B71009D6D49 /* Assets.xcassets */; };
 		A602726C23966B71009D6D49 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A602726A23966B71009D6D49 /* MainMenu.xib */; };
 		A602726F23966B71009D6D49 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A602726E23966B71009D6D49 /* main.m */; };
@@ -16,16 +17,17 @@
 		A602727C23966E71009D6D49 /* PlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = A602727B23966E71009D6D49 /* PlaybackView.m */; };
 		A6027284239692FA009D6D49 /* SignallingPluginFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6027283239692FA009D6D49 /* SignallingPluginFactory.m */; };
 		A6027288239695CB009D6D49 /* OvenMediaEngineSignallingPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = A6027287239695CB009D6D49 /* OvenMediaEngineSignallingPlugin.m */; };
-		D45CEEAD69D5CD384C774816 /* Pods_WebRTC_Player.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1031537A894810003425C9 /* Pods_WebRTC_Player.framework */; };
+		A602728B2396B056009D6D49 /* LogTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A602728A2396B056009D6D49 /* LogTextView.mm */; };
+		A602728E2397A00A009D6D49 /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A602728D2397A00A009D6D49 /* PlaybackViewController.m */; };
+		A6D03D782397ACB0008B2BC7 /* LogTextViewLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D03D772397ACB0008B2BC7 /* LogTextViewLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		288F209C535B93C8C7750506 /* Pods-WebRTC Player.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebRTC Player.release.xcconfig"; path = "Target Support Files/Pods-WebRTC Player/Pods-WebRTC Player.release.xcconfig"; sourceTree = "<group>"; };
 		3DF666BF14686A51C4310881 /* Pods-WebRTC Player.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebRTC Player.debug.xcconfig"; path = "Target Support Files/Pods-WebRTC Player/Pods-WebRTC Player.debug.xcconfig"; sourceTree = "<group>"; };
-		5D1031537A894810003425C9 /* Pods_WebRTC_Player.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebRTC_Player.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A602726223966B6F009D6D49 /* WebRTC Player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WebRTC Player.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A602726523966B6F009D6D49 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		A602726623966B6F009D6D49 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A602726523966B6F009D6D49 /* ApplicationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationDelegate.h; sourceTree = "<group>"; };
+		A602726623966B6F009D6D49 /* ApplicationDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationDelegate.m; sourceTree = "<group>"; };
 		A602726823966B71009D6D49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A602726B23966B71009D6D49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A602726D23966B71009D6D49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,6 +42,14 @@
 		A6027283239692FA009D6D49 /* SignallingPluginFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignallingPluginFactory.m; sourceTree = "<group>"; };
 		A6027286239695CB009D6D49 /* OvenMediaEngineSignallingPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OvenMediaEngineSignallingPlugin.h; sourceTree = "<group>"; };
 		A6027287239695CB009D6D49 /* OvenMediaEngineSignallingPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OvenMediaEngineSignallingPlugin.m; sourceTree = "<group>"; };
+		A60272892396B056009D6D49 /* LogTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogTextView.h; sourceTree = "<group>"; };
+		A602728A2396B056009D6D49 /* LogTextView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LogTextView.mm; sourceTree = "<group>"; };
+		A602728C2397A00A009D6D49 /* PlaybackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaybackViewController.h; sourceTree = "<group>"; };
+		A602728D2397A00A009D6D49 /* PlaybackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; };
+		A6D03D762397ACB0008B2BC7 /* LogTextViewLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogTextViewLogger.h; sourceTree = "<group>"; };
+		A6D03D772397ACB0008B2BC7 /* LogTextViewLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogTextViewLogger.m; sourceTree = "<group>"; };
+		A6D03D792397B352008B2BC7 /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		E9E8AD4D929D873B7469B80D /* Pods_WebRTC_Player.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebRTC_Player.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A602727823966BA7009D6D49 /* WebRTC.framework in Frameworks */,
-				D45CEEAD69D5CD384C774816 /* Pods_WebRTC_Player.framework in Frameworks */,
+				172EF669871BF11C4DA18098 /* Pods_WebRTC_Player.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,17 +86,17 @@
 		A602726423966B6F009D6D49 /* WebRTC Player */ = {
 			isa = PBXGroup;
 			children = (
+				A602728F2397A424009D6D49 /* UI */,
 				A602728523969305009D6D49 /* Signalling */,
-				A602726523966B6F009D6D49 /* AppDelegate.h */,
-				A602726623966B6F009D6D49 /* AppDelegate.m */,
+				A602726523966B6F009D6D49 /* ApplicationDelegate.h */,
+				A602726623966B6F009D6D49 /* ApplicationDelegate.m */,
 				A602726823966B71009D6D49 /* Assets.xcassets */,
-				A602726A23966B71009D6D49 /* MainMenu.xib */,
 				A602726D23966B71009D6D49 /* Info.plist */,
 				A602726E23966B71009D6D49 /* main.m */,
 				A602727023966B71009D6D49 /* WebRTC_Player.entitlements */,
-				A602727923966C48009D6D49 /* PlaybackView.xib */,
-				A602727B23966E71009D6D49 /* PlaybackView.m */,
-				A602727D23966E7F009D6D49 /* PlaybackView.h */,
+				A6D03D762397ACB0008B2BC7 /* LogTextViewLogger.h */,
+				A6D03D772397ACB0008B2BC7 /* LogTextViewLogger.m */,
+				A6D03D792397B352008B2BC7 /* Log.h */,
 			);
 			path = "WebRTC Player";
 			sourceTree = "<group>";
@@ -95,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				A602727723966BA7009D6D49 /* WebRTC.framework */,
-				5D1031537A894810003425C9 /* Pods_WebRTC_Player.framework */,
+				E9E8AD4D929D873B7469B80D /* Pods_WebRTC_Player.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -110,6 +120,21 @@
 				A6027287239695CB009D6D49 /* OvenMediaEngineSignallingPlugin.m */,
 			);
 			name = Signalling;
+			sourceTree = "<group>";
+		};
+		A602728F2397A424009D6D49 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A602726A23966B71009D6D49 /* MainMenu.xib */,
+				A602727923966C48009D6D49 /* PlaybackView.xib */,
+				A602727B23966E71009D6D49 /* PlaybackView.m */,
+				A602727D23966E7F009D6D49 /* PlaybackView.h */,
+				A60272892396B056009D6D49 /* LogTextView.h */,
+				A602728A2396B056009D6D49 /* LogTextView.mm */,
+				A602728C2397A00A009D6D49 /* PlaybackViewController.h */,
+				A602728D2397A00A009D6D49 /* PlaybackViewController.m */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		CEE469BE48C32EE8E37F51B1 /* Pods */ = {
@@ -235,10 +260,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6D03D782397ACB0008B2BC7 /* LogTextViewLogger.m in Sources */,
 				A602727C23966E71009D6D49 /* PlaybackView.m in Sources */,
 				A6027288239695CB009D6D49 /* OvenMediaEngineSignallingPlugin.m in Sources */,
+				A602728E2397A00A009D6D49 /* PlaybackViewController.m in Sources */,
+				A602728B2396B056009D6D49 /* LogTextView.mm in Sources */,
 				A602726F23966B71009D6D49 /* main.m in Sources */,
-				A602726723966B6F009D6D49 /* AppDelegate.m in Sources */,
+				A602726723966B6F009D6D49 /* ApplicationDelegate.m in Sources */,
 				A6027284239692FA009D6D49 /* SignallingPluginFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

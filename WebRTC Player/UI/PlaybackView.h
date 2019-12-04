@@ -7,7 +7,7 @@
 
 #import <WebRTC/WebRTC.h>
 
-@interface PlaybackView : NSView<NSComboBoxDataSource, RTCPeerConnectionDelegate>
+@interface PlaybackView : NSView<NSComboBoxDataSource, NSComboBoxDelegate, RTCPeerConnectionDelegate>
 @property (weak) IBOutlet NSTextField *urlTextField;
 @property (weak) IBOutlet NSButton *playButton;
 @property (strong) IBOutlet NSView *contentView;

@@ -1,16 +1,24 @@
 PODS:
+  - CocoaLumberjack (1.9.1):
+    - CocoaLumberjack/Extensions (= 1.9.1)
+  - CocoaLumberjack/Core (1.9.1)
+  - CocoaLumberjack/Extensions (1.9.1):
+    - CocoaLumberjack/Core
   - SocketRocket (0.5.1)
 
 DEPENDENCIES:
+  - CocoaLumberjack
   - SocketRocket
 
 SPEC REPOS:
   trunk:
+    - CocoaLumberjack
     - SocketRocket
 
 SPEC CHECKSUMS:
+  CocoaLumberjack: e9b828e64142be63c1c130517b33aa5e235d2413
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
-PODFILE CHECKSUM: 4828e84d395450beae28c5de2e33020f18f6a452
+PODFILE CHECKSUM: 6d8cf0ed06706209c445187038329e8f888da81b
 
 COCOAPODS: 1.8.4
