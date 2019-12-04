@@ -34,15 +34,16 @@ LogTextViewLogger *_logger;
     return self;
 }
 
--(void)addLine:(NSString*)line
+-(void)addMessage:(DDLogMessage*)message
 {
     dispatch_async(dispatch_get_main_queue(),^
     {
+        const bool isError = message->logFlag & LOG_FLAG_ERROR;
         NSDictionary *attributes =
         @{
-            NSForegroundColorAttributeName: NSColor.textColor
+            NSForegroundColorAttributeName: isError ? NSColor.redColor : NSColor.textColor
         };
-        [[self textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:line attributes:attributes]];
+        [[self textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:[message->logMsg stringByAppendingString:@"\n"] attributes:attributes]];
     });
 }
 @end

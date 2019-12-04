@@ -15,9 +15,6 @@
 
 - (void)logMessage:(DDLogMessage *)logMessage
 {
-    if (logMessage->logMsg)
-    {
-        [_logTextView addLine:logMessage->logMsg];
-    }
+    [_logTextView addMessage:logMessage];
 }
 @end

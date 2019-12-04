@@ -16,6 +16,7 @@
     request.allHTTPHeaderFields = @{ @"User-Agent": @"WebRTC Player"};
     _webSocket = [[SRWebSocket alloc] initWithURLRequest:request];
     _webSocket.delegate = self;
+    DDLogInfo(@"Opening Oven Media Engine WebSocket with url %@", _webSocket.url.absoluteURL);
     [_webSocket open];
 }
 
@@ -70,7 +71,7 @@
             }
             else
             {
-                DDLogError(@"Received unexpected message in the WebSocket:\n%@", response);
+                DDLogError(@"Received unexpected message in Oven Media Engine WebSocket with url %@:\n%@", _webSocket.url.absoluteURL, response);
             }
         }
         if (error)
@@ -86,6 +87,7 @@
       @"command": @"request_offer",
     };
     NSError *error = nil;
+    DDLogInfo(@"Sending request_offer to Oven Media Engine WebSocket with url %@", _webSocket.url.absoluteURL);
     [_webSocket send:[NSJSONSerialization dataWithJSONObject:command options:0 error:&error]];
 }
 

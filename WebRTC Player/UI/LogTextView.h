@@ -1,5 +1,7 @@
 #pragma once
 
+#import "Log.h"
+
 #import <AppKit/AppKit.h>
 #import <Cocoa/Cocoa.h>
 
@@ -7,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LogTextView : NSTextView
 
--(void)addLine:(NSString*)line;
+-(void)addMessage:(DDLogMessage*)message;
 
 @end
 
