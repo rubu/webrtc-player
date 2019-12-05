@@ -1,15 +1,22 @@
 #pragma once
 
 #import <Foundation/Foundation.h>
+#import <WebRTC/WebRTC.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^SdpOfferCallback)(NSDictionary<NSString *,NSString *> * _Nonnull);
-typedef void (^SdpAnswerCallback)(void);
+@protocol SignallingPlugin;
+
+typedef void (^SdpOfferCompletionHandler)(NSDictionary<NSString *,NSString *> * _Nonnull);
+typedef void (^SdpAnswerCompletionHandler)(void);
+typedef void (^CreateSignallingPluginCompletionHandler)(NSObject<SignallingPlugin> * _Nullable, NSError * _Nullable);
 
 @protocol SignallingPlugin <NSObject>
-- (void)getOfferFromUrl:(NSURL*) url withCompletion:(SdpOfferCallback)completion;
-- (void)setAnswer:(NSString*)sdp withCompletion:(SdpAnswerCallback)completion;
+- (instancetype)initWithAttributes:(NSDictionary*)attributes completionHandler:(CreateSignallingPluginCompletionHandler)completionHandler;
+- (void)getOfferWithCompletionHandler:(SdpOfferCompletionHandler)completionHandler;
+- (void)setAnswer:(NSString*)sdp completionHandler:(SdpAnswerCompletionHandler)completionHandler;
+- (void)addIceCandiate:(NSDictionary*)candidate;
+- (NSArray<NSString*>*)getIceServers;
 @end
 
 NS_ASSUME_NONNULL_END

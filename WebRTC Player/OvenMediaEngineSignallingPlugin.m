@@ -3,26 +3,46 @@
 
 @implementation OvenMediaEngineSignallingPlugin
 {
-    SdpOfferCallback _sdpOfferCallback;
-    SdpAnswerCallback _sdpAnswerCallback;
+    CreateSignallingPluginCompletionHandler _createSignallingPluginCompletionHandler;
+    SdpOfferCompletionHandler _sdpOfferCompletionHandler;
+    SdpAnswerCompletionHandler _sdpAnswerCompletionHandler;
     SRWebSocket *_webSocket;
     NSNumber* _id;
 }
 
-- (void)getOfferFromUrl:(nonnull NSURL *)url withCompletion:(SdpOfferCallback)completion
+- (instancetype)initWithAttributes:(NSDictionary*)attributes
+                 completionHandler:(CreateSignallingPluginCompletionHandler)completionHandler
 {
-    _sdpOfferCallback = completion;
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.allHTTPHeaderFields = @{ @"User-Agent": @"WebRTC Player"};
-    _webSocket = [[SRWebSocket alloc] initWithURLRequest:request];
-    _webSocket.delegate = self;
-    DDLogInfo(@"Opening Oven Media Engine WebSocket with url %@", _webSocket.url.absoluteURL);
-    [_webSocket open];
+    self = [super init];
+    
+    if (self)
+    {
+        _createSignallingPluginCompletionHandler = completionHandler;
+        NSURL* url = [attributes valueForKey:@"url"];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        request.allHTTPHeaderFields = @{ @"User-Agent": @"WebRTC Player"};
+        _webSocket = [[SRWebSocket alloc] initWithURLRequest:request];
+        _webSocket.delegate = self;
+        DDLogInfo(@"Opening Oven Media Engine WebSocket with url %@", _webSocket.url.absoluteURL);
+        [_webSocket open];
+    }
+    return self;
 }
 
-- (void)setAnswer:(NSString*)sdp withCompletion:(SdpAnswerCallback)completion;
+- (void)getOfferWithCompletionHandler:(SdpOfferCompletionHandler)completionHandler
 {
-    _sdpAnswerCallback = completion;
+    _sdpOfferCompletionHandler = completionHandler;
+    NSDictionary *command = @{
+      @"command": @"request_offer",
+    };
+    NSError *error = nil;
+    DDLogInfo(@"Sending request_offer to Oven Media Engine WebSocket with url %@", _webSocket.url.absoluteURL);
+    [_webSocket send:[NSJSONSerialization dataWithJSONObject:command options:0 error:&error]];
+}
+
+- (void)setAnswer:(NSString*)sdp completionHandler:(SdpAnswerCompletionHandler)completionHandler;
+{
+    _sdpAnswerCompletionHandler = completionHandler;
     NSDictionary *sdpDictionary =
     @{
         @"type": @"answer",
@@ -36,7 +56,20 @@
     };
     NSError *error = nil;
     [_webSocket send:[NSJSONSerialization dataWithJSONObject:command options:0 error:&error]];
-    _sdpAnswerCallback();
+    _sdpAnswerCompletionHandler();
+}
+
+
+- (void)addIceCandiate:(NSDictionary*)candidate
+{
+    NSDictionary *command =
+    @{
+        @"command": @"candidate",
+        @"candidates": [NSArray arrayWithObject:candidate],
+        @"id": _id
+    };
+    NSError *error = nil;
+    [_webSocket send:[NSJSONSerialization dataWithJSONObject:command options:0 error:&error]];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
@@ -62,12 +95,12 @@
                     NSDictionary<NSString*, NSString*> *offer = [NSDictionary dictionaryWithObjectsAndKeys:
                                                                  [(NSDictionary*)sdp valueForKey:@"sdp"], @"sdp",
                                                                  (NSArray*)candidates, @"candidates", nil];
-                    _sdpOfferCallback(offer);
+                    _sdpOfferCompletionHandler(offer);
                 }
             }
             else if ([command isEqualToString:@"answer"])
             {
-                _sdpAnswerCallback();
+                _sdpAnswerCompletionHandler();
             }
             else
             {
@@ -83,20 +116,16 @@
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket
 {
-    NSDictionary *command = @{
-      @"command": @"request_offer",
-    };
-    NSError *error = nil;
-    DDLogInfo(@"Sending request_offer to Oven Media Engine WebSocket with url %@", _webSocket.url.absoluteURL);
-    [_webSocket send:[NSJSONSerialization dataWithJSONObject:command options:0 error:&error]];
+    DDLogInfo(@"Successfully opened Oven Media Engine WebSocket with url %@", webSocket.url.absoluteURL);
+    _createSignallingPluginCompletionHandler(self, nil);
+    _createSignallingPluginCompletionHandler = nil;
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
-    if (error)
-    {
-        DDLogError(@"%@", error);
-    }
+    DDLogError(@"Failed to open opened Oven Media Engine WebSocket with url %@:\n%@", webSocket.url.absoluteURL, error);
+    _createSignallingPluginCompletionHandler(nil, error ? error : [[NSError alloc] init]);
+    _createSignallingPluginCompletionHandler = nil;
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
@@ -107,5 +136,10 @@
 - (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload
 {
     
+}
+
+- (NSArray<NSString*>*)getIceServers
+{
+    return [NSArray arrayWithObject:@"stun:stun.l.google.com:19302"];
 }
 @end

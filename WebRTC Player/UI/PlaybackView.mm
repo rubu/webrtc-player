@@ -10,6 +10,7 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
     RTCPeerConnection *_peerConnection;
     NSDictionary *_offer;
     NSObject<SignallingPlugin> *_signallingPlugin;
+    RTCVideoTrack *_remoteVideoTrack;
 }
 
 -(void)initialize
@@ -74,7 +75,7 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
     return 0;
 }
 
-- (void)clearPlaybackState
+- (void)reset
 {
     _peerConnection = nil;
     _offer = nil;
@@ -103,14 +104,24 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
                 if (selectedPluginIndex >= 0 && selectedPluginIndex < _plugins.count)
                 {
                     NSString *signallingPluginName = _plugins[_signallingPluginComboBox.indexOfSelectedItem];
-                    _signallingPlugin = [[[SignallingPluginFactory alloc] init] createSignallingPluginWithName:signallingPluginName];
-                    if (_signallingPlugin)
-                    {
-                        [self clearPlaybackState];
-                        [_signallingPlugin getOfferFromUrl:url withCompletion:^(NSDictionary* offer) {
-                            [self didReceiveOffer:offer];
-                        }];
-                    }
+                    NSDictionary *attributes =
+                    @{
+                        @"url": url
+                    };
+                    // This assignment is needed to keep the instance alive while the completion handler is pending
+                    _signallingPlugin = [[[SignallingPluginFactory alloc] init] createSignallingPluginWithName:signallingPluginName
+                                                                                                    attributes:attributes
+                                                                                             completionHandler:^(NSObject<SignallingPlugin> *signallingPlugin, NSError *error)
+                                         {
+                        self->_signallingPlugin = signallingPlugin;
+                        if (self->_signallingPlugin)
+                        {
+                            [self reset];
+                            [self->_signallingPlugin getOfferWithCompletionHandler:^(NSDictionary* offer) {
+                                [self didReceiveOffer:offer];
+                            }];
+                        }
+                    }];
                 }
             }
         }
@@ -121,6 +132,12 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
 {
     _offer = offer;
     RTCConfiguration *rtcConfiguration = [[RTCConfiguration alloc] init];
+    NSMutableArray<RTCIceServer*> *iceServers = [NSMutableArray array];
+    for (NSString *iceServer in [_signallingPlugin getIceServers])
+    {
+        [iceServers addObject:[[RTCIceServer alloc] initWithURLStrings:[NSArray arrayWithObject:iceServer]]];
+    }
+    rtcConfiguration.iceServers = iceServers;
     RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
     RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:nil optionalConstraints:nil];
     _peerConnection = [factory peerConnectionWithConfiguration:rtcConfiguration constraints:constraints delegate:self];
@@ -128,7 +145,7 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
     RTCSessionDescription *offerDescription = [[RTCSessionDescription alloc] initWithType:RTCSdpTypeOffer sdp:sdp];
     __unsafe_unretained typeof(self) weakSelf = self;
     [self->_peerConnection setRemoteDescription:offerDescription completionHandler:^(NSError *error)
-    {
+     {
         [weakSelf didSetRemoteDescriptionWithError:error];
     }];
 }
@@ -137,11 +154,11 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
 {
     __unsafe_unretained typeof(self) weakSelf = self;
     [_peerConnection answerForConstraints:[self defaultAnswerConstraints] completionHandler:^(RTCSessionDescription * _Nullable sdp, NSError * _Nullable error)
-    {
-        [weakSelf->_signallingPlugin setAnswer:sdp.sdp withCompletion:^()
-        {
+     {
+        [weakSelf->_signallingPlugin setAnswer:sdp.sdp completionHandler:^()
+         {
             [weakSelf->_peerConnection setLocalDescription:sdp completionHandler:^(NSError *error)
-            {
+             {
                 if (error == nil)
                 {
                     NSArray<NSDictionary*> *candidates = [weakSelf->_offer objectForKey:@"candidates"];
@@ -167,25 +184,30 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
 - (RTCMediaConstraints*)defaultAnswerConstraints
 {
     NSDictionary *mandatoryConstraints = @{
-      @"OfferToReceiveAudio" : @"true",
-      @"OfferToReceiveVideo" : @"true"
+        @"OfferToReceiveAudio" : @"true",
+        @"OfferToReceiveVideo" : @"true"
     };
     RTCMediaConstraints* constraints =
-        [[RTCMediaConstraints alloc]
-            initWithMandatoryConstraints:mandatoryConstraints
-                     optionalConstraints:nil];
+    [[RTCMediaConstraints alloc]
+     initWithMandatoryConstraints:mandatoryConstraints
+     optionalConstraints:nil];
     return constraints;
 }
 
 /** Called when the SignalingState changed. */
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-    didChangeSignalingState:(RTCSignalingState)stateChanged
+didChangeSignalingState:(RTCSignalingState)stateChanged
 {
 }
 
 /** Called when media is received on a new stream from remote peer. */
 - (void)peerConnection:(RTCPeerConnection *)peerConnection didAddStream:(RTCMediaStream *)stream
 {
+    if (stream.videoTracks && stream.videoTracks.count)
+    {
+        _remoteVideoTrack = stream.videoTracks[0];
+        [_remoteVideoTrack addRenderer:_videoView];
+    }
 }
 
 /** Called when a remote peer closes a stream.
@@ -202,26 +224,38 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
 
 /** Called any time the IceConnectionState changes. */
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-    didChangeIceConnectionState:(RTCIceConnectionState)newState
+didChangeIceConnectionState:(RTCIceConnectionState)newState
 {
 }
 
 /** Called any time the IceGatheringState changes. */
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-    didChangeIceGatheringState:(RTCIceGatheringState)newState
+didChangeIceGatheringState:(RTCIceGatheringState)newState
 {
+    if (newState == RTCIceGatheringStateComplete)
+    {
+        DDLogInfo(@"ICE gathering complete");
+    }
 }
 
 /** New ice candidate has been found. */
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-    didGenerateIceCandidate:(RTCIceCandidate *)candidate
+didGenerateIceCandidate:(RTCIceCandidate *)candidate
 {
+    NSDictionary *iceCandidate =
+    @{
+        @"candidate": candidate.sdp,
+        @"sdpMLineIndex": [NSNumber numberWithInt:candidate.sdpMLineIndex],
+        @"sdpMid": candidate.sdpMid
+    };
+    DDLogInfo(@"Sending ICE candidate:\n%@", iceCandidate);
+    [_signallingPlugin addIceCandiate:iceCandidate];
 }
 
 
 /** Called when a group of local Ice candidates have been removed. */
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-    didRemoveIceCandidates:(NSArray<RTCIceCandidate *> *)candidates
+didRemoveIceCandidates:(NSArray<RTCIceCandidate *> *)candidates
 {
 }
 
@@ -242,4 +276,5 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
         }
     }
 }
+
 @end

@@ -7,19 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		172EF669871BF11C4DA18098 /* Pods_WebRTC_Player.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E8AD4D929D873B7469B80D /* Pods_WebRTC_Player.framework */; };
 		A602726723966B6F009D6D49 /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A602726623966B6F009D6D49 /* ApplicationDelegate.m */; };
 		A602726923966B71009D6D49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A602726823966B71009D6D49 /* Assets.xcassets */; };
 		A602726C23966B71009D6D49 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A602726A23966B71009D6D49 /* MainMenu.xib */; };
 		A602726F23966B71009D6D49 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A602726E23966B71009D6D49 /* main.m */; };
-		A602727823966BA7009D6D49 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A602727723966BA7009D6D49 /* WebRTC.framework */; };
 		A602727A23966C48009D6D49 /* PlaybackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A602727923966C48009D6D49 /* PlaybackView.xib */; };
-		A602727C23966E71009D6D49 /* PlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = A602727B23966E71009D6D49 /* PlaybackView.m */; };
+		A602727C23966E71009D6D49 /* PlaybackView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A602727B23966E71009D6D49 /* PlaybackView.mm */; };
 		A6027284239692FA009D6D49 /* SignallingPluginFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6027283239692FA009D6D49 /* SignallingPluginFactory.m */; };
 		A6027288239695CB009D6D49 /* OvenMediaEngineSignallingPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = A6027287239695CB009D6D49 /* OvenMediaEngineSignallingPlugin.m */; };
 		A602728B2396B056009D6D49 /* LogTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A602728A2396B056009D6D49 /* LogTextView.mm */; };
 		A602728E2397A00A009D6D49 /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A602728D2397A00A009D6D49 /* PlaybackViewController.m */; };
+		A614C98723980ABC00E0CF39 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A614C98623980ABC00E0CF39 /* MetalKit.framework */; };
+		A614C989239815D900E0CF39 /* YCbCr-Shared.metal in Sources */ = {isa = PBXBuildFile; fileRef = A614C988239815D900E0CF39 /* YCbCr-Shared.metal */; };
+		A614C98C23982A5300E0CF39 /* MTKWebRTCVideoView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A614C98B23982A5300E0CF39 /* MTKWebRTCVideoView.mm */; };
 		A6D03D782397ACB0008B2BC7 /* LogTextViewLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D03D772397ACB0008B2BC7 /* LogTextViewLogger.m */; };
+		A6D03D7A2397EDEB008B2BC7 /* Pods_WebRTC_Player.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E8AD4D929D873B7469B80D /* Pods_WebRTC_Player.framework */; };
+		A6D03D7D2397EDED008B2BC7 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A602727723966BA7009D6D49 /* WebRTC.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +38,7 @@
 		A602727023966B71009D6D49 /* WebRTC_Player.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebRTC_Player.entitlements; sourceTree = "<group>"; };
 		A602727723966BA7009D6D49 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = "../../Git/webrtc-checkout/src/out/Debug/WebRTC.framework"; sourceTree = "<group>"; };
 		A602727923966C48009D6D49 /* PlaybackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaybackView.xib; sourceTree = "<group>"; };
-		A602727B23966E71009D6D49 /* PlaybackView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaybackView.m; sourceTree = "<group>"; };
+		A602727B23966E71009D6D49 /* PlaybackView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PlaybackView.mm; sourceTree = "<group>"; };
 		A602727D23966E7F009D6D49 /* PlaybackView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaybackView.h; sourceTree = "<group>"; };
 		A602728123969232009D6D49 /* SignallingPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignallingPlugin.h; sourceTree = "<group>"; };
 		A6027282239692FA009D6D49 /* SignallingPluginFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignallingPluginFactory.h; sourceTree = "<group>"; };
@@ -46,6 +49,10 @@
 		A602728A2396B056009D6D49 /* LogTextView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LogTextView.mm; sourceTree = "<group>"; };
 		A602728C2397A00A009D6D49 /* PlaybackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaybackViewController.h; sourceTree = "<group>"; };
 		A602728D2397A00A009D6D49 /* PlaybackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; };
+		A614C98623980ABC00E0CF39 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		A614C988239815D900E0CF39 /* YCbCr-Shared.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = "YCbCr-Shared.metal"; sourceTree = "<group>"; };
+		A614C98A23982A5300E0CF39 /* MTKWebRTCVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTKWebRTCVideoView.h; sourceTree = "<group>"; };
+		A614C98B23982A5300E0CF39 /* MTKWebRTCVideoView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MTKWebRTCVideoView.mm; sourceTree = "<group>"; };
 		A6D03D762397ACB0008B2BC7 /* LogTextViewLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogTextViewLogger.h; sourceTree = "<group>"; };
 		A6D03D772397ACB0008B2BC7 /* LogTextViewLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogTextViewLogger.m; sourceTree = "<group>"; };
 		A6D03D792397B352008B2BC7 /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
@@ -57,8 +64,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A602727823966BA7009D6D49 /* WebRTC.framework in Frameworks */,
-				172EF669871BF11C4DA18098 /* Pods_WebRTC_Player.framework in Frameworks */,
+				A614C98723980ABC00E0CF39 /* MetalKit.framework in Frameworks */,
+				A6D03D7A2397EDEB008B2BC7 /* Pods_WebRTC_Player.framework in Frameworks */,
+				A6D03D7D2397EDED008B2BC7 /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +105,7 @@
 				A6D03D762397ACB0008B2BC7 /* LogTextViewLogger.h */,
 				A6D03D772397ACB0008B2BC7 /* LogTextViewLogger.m */,
 				A6D03D792397B352008B2BC7 /* Log.h */,
+				A614C988239815D900E0CF39 /* YCbCr-Shared.metal */,
 			);
 			path = "WebRTC Player";
 			sourceTree = "<group>";
@@ -104,6 +113,7 @@
 		A602727623966BA7009D6D49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A614C98623980ABC00E0CF39 /* MetalKit.framework */,
 				A602727723966BA7009D6D49 /* WebRTC.framework */,
 				E9E8AD4D929D873B7469B80D /* Pods_WebRTC_Player.framework */,
 			);
@@ -127,12 +137,14 @@
 			children = (
 				A602726A23966B71009D6D49 /* MainMenu.xib */,
 				A602727923966C48009D6D49 /* PlaybackView.xib */,
-				A602727B23966E71009D6D49 /* PlaybackView.m */,
+				A602727B23966E71009D6D49 /* PlaybackView.mm */,
 				A602727D23966E7F009D6D49 /* PlaybackView.h */,
 				A60272892396B056009D6D49 /* LogTextView.h */,
 				A602728A2396B056009D6D49 /* LogTextView.mm */,
 				A602728C2397A00A009D6D49 /* PlaybackViewController.h */,
 				A602728D2397A00A009D6D49 /* PlaybackViewController.m */,
+				A614C98A23982A5300E0CF39 /* MTKWebRTCVideoView.h */,
+				A614C98B23982A5300E0CF39 /* MTKWebRTCVideoView.mm */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -261,10 +273,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6D03D782397ACB0008B2BC7 /* LogTextViewLogger.m in Sources */,
-				A602727C23966E71009D6D49 /* PlaybackView.m in Sources */,
+				A602727C23966E71009D6D49 /* PlaybackView.mm in Sources */,
 				A6027288239695CB009D6D49 /* OvenMediaEngineSignallingPlugin.m in Sources */,
+				A614C989239815D900E0CF39 /* YCbCr-Shared.metal in Sources */,
 				A602728E2397A00A009D6D49 /* PlaybackViewController.m in Sources */,
 				A602728B2396B056009D6D49 /* LogTextView.mm in Sources */,
+				A614C98C23982A5300E0CF39 /* MTKWebRTCVideoView.mm in Sources */,
 				A602726F23966B71009D6D49 /* main.m in Sources */,
 				A602726723966B6F009D6D49 /* ApplicationDelegate.m in Sources */,
 				A6027284239692FA009D6D49 /* SignallingPluginFactory.m in Sources */,
@@ -408,9 +422,9 @@
 				);
 				INFOPLIST_FILE = "WebRTC Player/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
 					"/Users/rudolfs/Git/webrtc-checkout/src/out/${CONFIGURATION}",
+					"@executable_path/../Frameworks",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rubu.WebRTC-Player";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -431,9 +445,9 @@
 				);
 				INFOPLIST_FILE = "WebRTC Player/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
 					"/Users/rudolfs/Git/webrtc-checkout/src/out/${CONFIGURATION}",
+					"@executable_path/../Frameworks",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rubu.WebRTC-Player";
 				PRODUCT_NAME = "$(TARGET_NAME)";

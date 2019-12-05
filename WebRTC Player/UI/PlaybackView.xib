@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.AVKitIBPlugin" version="15505"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,9 +10,9 @@
             <connections>
                 <outlet property="contentView" destination="c22-O7-iKe" id="srl-0j-NOM"/>
                 <outlet property="playButton" destination="SSw-Ym-rfV" id="XGC-Bm-SOt"/>
-                <outlet property="player" destination="ZXd-UT-LaX" id="YcO-bq-rrW"/>
                 <outlet property="signallingPluginComboBox" destination="iHW-15-uRa" id="vj9-vx-Aed"/>
                 <outlet property="urlTextField" destination="RHF-MM-xuu" id="ySh-GT-1Gh"/>
+                <outlet property="videoView" destination="N0C-Cz-fc2" id="eX4-ek-nxJ"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -44,7 +43,7 @@
                     </connections>
                 </textField>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SSw-Ym-rfV">
-                    <rect key="frame" x="397" y="226" width="69" height="32"/>
+                    <rect key="frame" x="397" y="226" width="66" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Play" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XEm-fm-RNQ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -54,10 +53,6 @@
                         <action selector="play:" target="-2" id="ZS5-6y-gn0"/>
                     </connections>
                 </button>
-                <avPlayerView fixedFrame="YES" controlsStyle="inline" translatesAutoresizingMaskIntoConstraints="NO" id="ZXd-UT-LaX">
-                    <rect key="frame" x="20" y="20" width="440" height="181"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </avPlayerView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQF-dT-TG8">
                     <rect key="frame" x="18" y="209" width="108" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -71,7 +66,7 @@
                     <rect key="frame" x="132" y="204" width="266" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="cRP-Hv-sAJ">
-                        <font key="font" metaFont="cellTitle"/>
+                        <font key="font" metaFont="label" size="12"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </comboBoxCell>
@@ -79,12 +74,17 @@
                         <outlet property="dataSource" destination="-2" id="jMH-TH-MiC"/>
                     </connections>
                 </comboBox>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N0C-Cz-fc2" customClass="MTKWebRTCVideoView">
+                    <rect key="frame" x="20" y="20" width="440" height="180"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </customView>
             </subviews>
             <point key="canvasLocation" x="140" y="154"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="aZ7-kg-gTv"/>
         <viewController id="mgH-g6-S0g" customClass="PlaybackViewController">
             <connections>
+                <outlet property="videoView" destination="N0C-Cz-fc2" id="ftO-TL-pFd"/>
                 <outlet property="view" destination="c22-O7-iKe" id="6XB-gd-jmF"/>
             </connections>
         </viewController>
