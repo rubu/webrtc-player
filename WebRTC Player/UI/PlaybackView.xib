@@ -21,18 +21,16 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KJW-V4-4VL">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KJW-V4-4VL">
                     <rect key="frame" x="18" y="236" width="26" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Url:" id="PJf-hk-R5m">
                         <font key="font" usesAppearanceFont="YES"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RHF-MM-xuu">
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RHF-MM-xuu">
                     <rect key="frame" x="50" y="233" width="340" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="drg-wg-PSL">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -42,9 +40,8 @@
                         <binding destination="aZ7-kg-gTv" name="value" keyPath="values.url" id="BlP-N5-Z1u"/>
                     </connections>
                 </textField>
-                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iHW-15-uRa">
+                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iHW-15-uRa">
                     <rect key="frame" x="132" y="205" width="261" height="23"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="cRP-Hv-sAJ">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -54,22 +51,19 @@
                         <outlet property="dataSource" destination="-2" id="jMH-TH-MiC"/>
                     </connections>
                 </comboBox>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N0C-Cz-fc2" customClass="MTKWebRTCVideoView">
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="N0C-Cz-fc2" customClass="MTKWebRTCVideoView">
                     <rect key="frame" x="20" y="20" width="440" height="181"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </customView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQF-dT-TG8">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lQF-dT-TG8">
                     <rect key="frame" x="18" y="209" width="108" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Signalling Plugin:" id="eDs-V2-2bX">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K3I-GK-2nP">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K3I-GK-2nP">
                     <rect key="frame" x="392" y="226" width="74" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Play" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CsJ-pz-bRs">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -79,6 +73,26 @@
                     </connections>
                 </button>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="K3I-GK-2nP" secondAttribute="trailing" constant="20" symbolic="YES" id="6qm-Xi-WSP"/>
+                <constraint firstItem="K3I-GK-2nP" firstAttribute="leading" secondItem="RHF-MM-xuu" secondAttribute="trailing" constant="8" symbolic="YES" id="7N9-2n-vad"/>
+                <constraint firstItem="KJW-V4-4VL" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="EP8-R8-yLx"/>
+                <constraint firstItem="KJW-V4-4VL" firstAttribute="leading" secondItem="lQF-dT-TG8" secondAttribute="leading" id="FeZ-Pw-JDb"/>
+                <constraint firstItem="N0C-Cz-fc2" firstAttribute="top" secondItem="iHW-15-uRa" secondAttribute="bottom" constant="8" symbolic="YES" id="Gd0-Gu-ivR"/>
+                <constraint firstItem="KJW-V4-4VL" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="HEQ-Ut-mmf"/>
+                <constraint firstItem="K3I-GK-2nP" firstAttribute="trailing" secondItem="N0C-Cz-fc2" secondAttribute="trailing" id="JSZ-IF-d48"/>
+                <constraint firstItem="RHF-MM-xuu" firstAttribute="baseline" secondItem="K3I-GK-2nP" secondAttribute="baseline" id="Jmz-qF-TfC"/>
+                <constraint firstItem="RHF-MM-xuu" firstAttribute="leading" secondItem="KJW-V4-4VL" secondAttribute="trailing" constant="8" symbolic="YES" id="QPJ-0c-VW5"/>
+                <constraint firstItem="iHW-15-uRa" firstAttribute="leading" secondItem="lQF-dT-TG8" secondAttribute="trailing" constant="8" symbolic="YES" id="QWq-h1-DPO"/>
+                <constraint firstItem="KJW-V4-4VL" firstAttribute="baseline" secondItem="RHF-MM-xuu" secondAttribute="baseline" id="Qkf-nd-jo0"/>
+                <constraint firstItem="lQF-dT-TG8" firstAttribute="top" secondItem="RHF-MM-xuu" secondAttribute="bottom" constant="8" symbolic="YES" id="bBu-Pn-eoT"/>
+                <constraint firstItem="RHF-MM-xuu" firstAttribute="trailing" secondItem="iHW-15-uRa" secondAttribute="trailing" id="cUF-5J-LEe"/>
+                <constraint firstAttribute="bottom" secondItem="N0C-Cz-fc2" secondAttribute="bottom" constant="20" symbolic="YES" id="hR4-Vw-RSV"/>
+                <constraint firstItem="lQF-dT-TG8" firstAttribute="leading" secondItem="N0C-Cz-fc2" secondAttribute="leading" id="inb-4i-TXr"/>
+                <constraint firstItem="N0C-Cz-fc2" firstAttribute="top" secondItem="lQF-dT-TG8" secondAttribute="bottom" constant="8" symbolic="YES" id="nTu-U5-aDZ"/>
+                <constraint firstAttribute="trailing" secondItem="iHW-15-uRa" secondAttribute="trailing" constant="90" id="wiM-Y4-hwq"/>
+                <constraint firstItem="lQF-dT-TG8" firstAttribute="baseline" secondItem="iHW-15-uRa" secondAttribute="firstBaseline" id="ywi-Ad-ZMV"/>
+            </constraints>
             <point key="canvasLocation" x="140" y="154"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="aZ7-kg-gTv"/>
