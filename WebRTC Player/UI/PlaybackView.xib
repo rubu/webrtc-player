@@ -9,7 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PlaybackView">
             <connections>
                 <outlet property="contentView" destination="c22-O7-iKe" id="srl-0j-NOM"/>
-                <outlet property="playButton" destination="SSw-Ym-rfV" id="XGC-Bm-SOt"/>
+                <outlet property="playButton" destination="K3I-GK-2nP" id="UZW-xn-s1E"/>
                 <outlet property="signallingPluginComboBox" destination="iHW-15-uRa" id="vj9-vx-Aed"/>
                 <outlet property="urlTextField" destination="RHF-MM-xuu" id="ySh-GT-1Gh"/>
                 <outlet property="videoView" destination="N0C-Cz-fc2" id="eX4-ek-nxJ"/>
@@ -31,8 +31,8 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RHF-MM-xuu">
-                    <rect key="frame" x="50" y="233" width="345" height="21"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <rect key="frame" x="50" y="233" width="340" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="drg-wg-PSL">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -42,17 +42,22 @@
                         <binding destination="aZ7-kg-gTv" name="value" keyPath="values.url" id="BlP-N5-Z1u"/>
                     </connections>
                 </textField>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SSw-Ym-rfV">
-                    <rect key="frame" x="397" y="226" width="66" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="Play" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XEm-fm-RNQ">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iHW-15-uRa">
+                    <rect key="frame" x="132" y="205" width="261" height="23"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="cRP-Hv-sAJ">
                         <font key="font" metaFont="system"/>
-                    </buttonCell>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </comboBoxCell>
                     <connections>
-                        <action selector="play:" target="-2" id="ZS5-6y-gn0"/>
+                        <outlet property="dataSource" destination="-2" id="jMH-TH-MiC"/>
                     </connections>
-                </button>
+                </comboBox>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N0C-Cz-fc2" customClass="MTKWebRTCVideoView">
+                    <rect key="frame" x="20" y="20" width="440" height="181"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQF-dT-TG8">
                     <rect key="frame" x="18" y="209" width="108" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -62,22 +67,17 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iHW-15-uRa">
-                    <rect key="frame" x="132" y="204" width="266" height="23"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="cRP-Hv-sAJ">
-                        <font key="font" metaFont="label" size="12"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </comboBoxCell>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K3I-GK-2nP">
+                    <rect key="frame" x="392" y="226" width="74" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Play" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CsJ-pz-bRs">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
                     <connections>
-                        <outlet property="dataSource" destination="-2" id="jMH-TH-MiC"/>
+                        <action selector="play:" target="-2" id="YVH-R2-bQ4"/>
                     </connections>
-                </comboBox>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N0C-Cz-fc2" customClass="MTKWebRTCVideoView">
-                    <rect key="frame" x="20" y="20" width="440" height="180"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </customView>
+                </button>
             </subviews>
             <point key="canvasLocation" x="140" y="154"/>
         </customView>

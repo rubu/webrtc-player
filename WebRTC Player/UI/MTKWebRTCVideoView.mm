@@ -115,7 +115,7 @@ struct PixelBufferPlane
             return;
         }
         CVPixelBufferLockBaseAddress(pixelBuffer, 0);
-        PixelBufferPlane yPlane(pixelBuffer, 0), uPlane(pixelBuffer, 1), vPlane(pixelBuffer, 1);
+        PixelBufferPlane yPlane(pixelBuffer, 0), uPlane(pixelBuffer, 1), vPlane(pixelBuffer, 2);
         CopyPlane(i420Buffer.dataY, i420Buffer.strideY, yPlane._plane, yPlane._stride, i420Buffer.height);
         CopyPlane(i420Buffer.dataU, i420Buffer.strideU, uPlane._plane, uPlane._stride, i420Buffer.chromaHeight);
         CopyPlane(i420Buffer.dataV, i420Buffer.strideV, vPlane._plane, vPlane._stride, i420Buffer.chromaHeight);
@@ -128,14 +128,14 @@ struct PixelBufferPlane
             return;
         }
         _yTexture = CVMetalTextureGetTexture(texture);
-        result = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _textureCache, pixelBuffer, nil, MTLPixelFormatR8Unorm, i420Buffer.chromaHeight, i420Buffer.chromaWidth, 1, &texture);
+        result = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _textureCache, pixelBuffer, nil, MTLPixelFormatR8Unorm, i420Buffer.chromaWidth, i420Buffer.chromaHeight, 1, &texture);
         if (result != kCVReturnSuccess)
         {
             DDLogError(@"CVMetalTextureCacheCreateTextureFromImage() failed with %d", result);
             return;
         }
         _uTexture = CVMetalTextureGetTexture(texture);
-        result = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _textureCache, pixelBuffer, nil, MTLPixelFormatR8Unorm, i420Buffer.chromaHeight, i420Buffer.chromaWidth, 1, &texture);
+        result = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, _textureCache, pixelBuffer, nil, MTLPixelFormatR8Unorm, i420Buffer.chromaWidth, i420Buffer.chromaHeight, 2, &texture);
         if (result != kCVReturnSuccess)
         {
             DDLogError(@"CVMetalTextureCacheCreateTextureFromImage() failed with %d", result);
