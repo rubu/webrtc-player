@@ -1,5 +1,6 @@
 #import "SignallingPluginFactory.h"
 #import "OvenMediaEngineSignallingPlugin.h"
+#import "InfinivizSignallingPlugin.h"
 
 @implementation SignallingPluginFactory
 
@@ -10,6 +11,10 @@
     if ([name isEqualToString:@"Oven Media Engine"])
     {
         return [[OvenMediaEngineSignallingPlugin alloc] initWithAttributes:attributes completionHandler:completionHandler];
+    }
+    else if ([name isEqualToString:@"Infiniviz"])
+    {
+        return [[InfinivizSignallingPlugin alloc] initWithAttributes:attributes completionHandler:completionHandler];
     }
     return nil;
 }

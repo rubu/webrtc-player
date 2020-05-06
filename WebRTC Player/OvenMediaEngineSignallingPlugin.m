@@ -42,21 +42,24 @@
 
 - (void)setAnswer:(NSString*)sdp completionHandler:(SdpAnswerCompletionHandler)completionHandler;
 {
-    _sdpAnswerCompletionHandler = completionHandler;
-    NSDictionary *sdpDictionary =
-    @{
-        @"type": @"answer",
-        @"sdp": sdp,
-    };
-    NSDictionary *command =
-    @{
-        @"command": @"answer",
-        @"sdp": sdpDictionary,
-        @"id": _id
-    };
-    NSError *error = nil;
-    [_webSocket send:[NSJSONSerialization dataWithJSONObject:command options:0 error:&error]];
-    _sdpAnswerCompletionHandler();
+    if (sdp)
+    {
+        _sdpAnswerCompletionHandler = completionHandler;
+        NSDictionary *sdpDictionary =
+        @{
+            @"type": @"answer",
+            @"sdp": sdp,
+        };
+        NSDictionary *command =
+        @{
+            @"command": @"answer",
+            @"sdp": sdpDictionary,
+            @"id": _id
+        };
+        NSError *error = nil;
+        [_webSocket send:[NSJSONSerialization dataWithJSONObject:command options:0 error:&error]];
+        _sdpAnswerCompletionHandler();
+    }
 }
 
 
@@ -138,8 +141,4 @@
     
 }
 
-- (NSArray<NSString*>*)getIceServers
-{
-    return [NSArray arrayWithObject:@"stun:stun.l.google.com:19302"];
-}
 @end

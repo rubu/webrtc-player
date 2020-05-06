@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <SocketRocket/SocketRocket.h>
+#import <SocketRocket/SRWebSocket.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

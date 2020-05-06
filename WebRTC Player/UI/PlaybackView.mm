@@ -15,7 +15,7 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
 
 -(void)initialize
 {
-    _plugins = [NSArray arrayWithObjects:@"Oven Media Engine", nil];
+    _plugins = [NSArray arrayWithObjects:@"Oven Media Engine", @"Infiniviz", nil];
     BOOL viewLoaded = [[NSBundle mainBundle] loadNibNamed:@"PlaybackView" owner:self topLevelObjects:nil];
     NSAssert(viewLoaded, @"Failed to load PlaybackView");
     [self addSubview:self.contentView];
@@ -128,18 +128,22 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
     }
 }
 
+#import "SignallingPlugin.h"
+
 - (void)didReceiveOffer:(NSDictionary*)offer
 {
     _offer = offer;
     RTCConfiguration *rtcConfiguration = [[RTCConfiguration alloc] init];
     NSMutableArray<RTCIceServer*> *iceServers = [NSMutableArray array];
-    for (NSString *iceServer in [_signallingPlugin getIceServers])
-    {
-        [iceServers addObject:[[RTCIceServer alloc] initWithURLStrings:[NSArray arrayWithObject:iceServer]]];
-    }
+    [iceServers addObject:[[RTCIceServer alloc] initWithURLStrings:[NSArray arrayWithObject:@"stun:stun.l.google.com:19302"]]];
     rtcConfiguration.iceServers = iceServers;
     RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
-    RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:nil optionalConstraints:nil];
+    NSDictionary<NSString*, NSString*> *mandatoryConstraints =
+    @{
+        kRTCMediaConstraintsOfferToReceiveVideo : kRTCMediaConstraintsValueFalse,
+        kRTCMediaConstraintsOfferToReceiveAudio : kRTCMediaConstraintsValueFalse,
+    };
+    RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatoryConstraints optionalConstraints:nil];
     _peerConnection = [factory peerConnectionWithConfiguration:rtcConfiguration constraints:constraints delegate:self];
     NSString *sdp = [_offer objectForKey:@"sdp"];
     RTCSessionDescription *offerDescription = [[RTCSessionDescription alloc] initWithType:RTCSdpTypeOffer sdp:sdp];
@@ -152,32 +156,44 @@ NSString * const kSignallingPluginUserDefaultsKey = @"signallingPlugin";
 
 - (void)didSetRemoteDescriptionWithError:(NSError*)error
 {
+    if (error)
+    {
+        DDLogError(@"Failed to set remote description: %@", error);
+        return;
+    }
     __unsafe_unretained typeof(self) weakSelf = self;
     [_peerConnection answerForConstraints:[self defaultAnswerConstraints] completionHandler:^(RTCSessionDescription * _Nullable sdp, NSError * _Nullable error)
      {
-        [weakSelf->_signallingPlugin setAnswer:sdp.sdp completionHandler:^()
-         {
-            [weakSelf->_peerConnection setLocalDescription:sdp completionHandler:^(NSError *error)
-             {
-                if (error == nil)
-                {
-                    NSArray<NSDictionary*> *candidates = [weakSelf->_offer objectForKey:@"candidates"];
-                    for (NSDictionary *candidate in candidates)
+        if (error == nil && sdp)
+        {
+            [weakSelf->_signallingPlugin setAnswer:sdp.sdp completionHandler:^()
+            {
+                [weakSelf->_peerConnection setLocalDescription:sdp completionHandler:^(NSError *error)
+                 {
+                    if (error == nil)
                     {
-                        id sdpMLineIndex = [candidate objectForKey:@"sdpMLineIndex"];
-                        RTCIceCandidate *iceCandidate = [[RTCIceCandidate alloc] initWithSdp:[candidate objectForKey:@"candidate"] sdpMLineIndex:((NSNumber*)sdpMLineIndex).intValue sdpMid:nil];
-                        if (iceCandidate)
+                        NSArray<NSDictionary*> *candidates = [weakSelf->_offer objectForKey:@"candidates"];
+                        for (NSDictionary *candidate in candidates)
                         {
-                            [weakSelf->_peerConnection addIceCandidate:iceCandidate];
-                        }
-                        else
-                        {
-                            DDLogError(@"Failed to create ICE candidate");
+                            id sdpMLineIndex = [candidate objectForKey:@"sdpMLineIndex"];
+                            RTCIceCandidate *iceCandidate = [[RTCIceCandidate alloc] initWithSdp:[candidate objectForKey:@"candidate"] sdpMLineIndex:((NSNumber*)sdpMLineIndex).intValue sdpMid:nil];
+                            if (iceCandidate)
+                            {
+                                [weakSelf->_peerConnection addIceCandidate:iceCandidate];
+                            }
+                            else
+                            {
+                                DDLogError(@"Failed to create ICE candidate");
+                            }
                         }
                     }
-                }
+                }];
             }];
-        }];
+        }
+        else if (error)
+        {
+            DDLogError(@"WebRTC peer connection failed to provide and answer: %@", error);
+        }
     }];
 }
 

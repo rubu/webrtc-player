@@ -16,7 +16,6 @@ typedef void (^CreateSignallingPluginCompletionHandler)(NSObject<SignallingPlugi
 - (void)getOfferWithCompletionHandler:(SdpOfferCompletionHandler)completionHandler;
 - (void)setAnswer:(NSString*)sdp completionHandler:(SdpAnswerCompletionHandler)completionHandler;
 - (void)addIceCandiate:(NSDictionary*)candidate;
-- (NSArray<NSString*>*)getIceServers;
 @end
 
 NS_ASSUME_NONNULL_END
