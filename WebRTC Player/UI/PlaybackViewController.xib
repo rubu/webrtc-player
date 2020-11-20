@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="PlaybackView">
+        <customObject id="-2" userLabel="File's Owner" customClass="PlaybackViewController">
             <connections>
-                <outlet property="contentView" destination="c22-O7-iKe" id="srl-0j-NOM"/>
-                <outlet property="playButton" destination="K3I-GK-2nP" id="UZW-xn-s1E"/>
-                <outlet property="signallingPluginComboBox" destination="iHW-15-uRa" id="vj9-vx-Aed"/>
-                <outlet property="urlTextField" destination="RHF-MM-xuu" id="ySh-GT-1Gh"/>
-                <outlet property="videoView" destination="N0C-Cz-fc2" id="eX4-ek-nxJ"/>
+                <outlet property="playButton" destination="K3I-GK-2nP" id="3Dl-oL-sot"/>
+                <outlet property="signallingPluginComboBox" destination="iHW-15-uRa" id="lcj-6h-My5"/>
+                <outlet property="urlTextField" destination="RHF-MM-xuu" id="3of-qo-VyF"/>
+                <outlet property="videoView" destination="N0C-Cz-fc2" id="Cdk-f1-jHM"/>
+                <outlet property="view" destination="c22-O7-iKe" id="j4z-dY-jE1"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <userDefaultsController representsSharedInstance="YES" id="aZ7-kg-gTv"/>
         <customView id="c22-O7-iKe">
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,9 +37,6 @@
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
-                    <connections>
-                        <binding destination="aZ7-kg-gTv" name="value" keyPath="values.url" id="BlP-N5-Z1u"/>
-                    </connections>
                 </textField>
                 <comboBox verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iHW-15-uRa">
                     <rect key="frame" x="132" y="205" width="255" height="23"/>
@@ -48,7 +46,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </comboBoxCell>
                     <connections>
-                        <outlet property="dataSource" destination="-2" id="jMH-TH-MiC"/>
+                        <outlet property="dataSource" destination="-2" id="L0t-N0-LxR"/>
+                        <outlet property="delegate" destination="-2" id="U9z-rM-9dw"/>
                     </connections>
                 </comboBox>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="N0C-Cz-fc2" customClass="MTKWebRTCVideoView">
@@ -69,7 +68,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="play:" target="-2" id="YVH-R2-bQ4"/>
+                        <action selector="play:" target="-2" id="I9b-OK-k9q"/>
                     </connections>
                 </button>
             </subviews>
@@ -95,12 +94,5 @@
             </constraints>
             <point key="canvasLocation" x="140" y="154"/>
         </customView>
-        <userDefaultsController representsSharedInstance="YES" id="aZ7-kg-gTv"/>
-        <viewController id="mgH-g6-S0g" customClass="PlaybackViewController">
-            <connections>
-                <outlet property="videoView" destination="N0C-Cz-fc2" id="ftO-TL-pFd"/>
-                <outlet property="view" destination="c22-O7-iKe" id="6XB-gd-jmF"/>
-            </connections>
-        </viewController>
     </objects>
 </document>

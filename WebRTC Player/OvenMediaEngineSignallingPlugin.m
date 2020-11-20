@@ -126,7 +126,7 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
-    DDLogError(@"Failed to open opened Oven Media Engine WebSocket with url %@:\n%@", webSocket.url.absoluteURL, error);
+    DDLogError(@"Failed to open Oven Media Engine WebSocket with url %@:\n%@", webSocket.url.absoluteURL, error);
     _createSignallingPluginCompletionHandler(nil, error ? error : [[NSError alloc] init]);
     _createSignallingPluginCompletionHandler = nil;
 }

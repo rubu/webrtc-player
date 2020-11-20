@@ -2,6 +2,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PlaybackView : NSView
+@interface StatisticsView : NSView
 
 @end

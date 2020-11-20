@@ -1,6 +1,7 @@
 #import "SignallingPluginFactory.h"
 #import "OvenMediaEngineSignallingPlugin.h"
 #import "InfinivizSignallingPlugin.h"
+#import "WowzaSignallingPlugin.h"
 
 @implementation SignallingPluginFactory
 
@@ -15,6 +16,10 @@
     else if ([name isEqualToString:@"Infiniviz"])
     {
         return [[InfinivizSignallingPlugin alloc] initWithAttributes:attributes completionHandler:completionHandler];
+    }
+    else if ([name isEqualToString:@"Wowza"])
+    {
+        return [[WowzaSignallingPlugin alloc] initWithAttributes:attributes completionHandler:completionHandler];
     }
     return nil;
 }
