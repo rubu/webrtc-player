@@ -71,6 +71,7 @@ NSString * const kSignallingPluginUrlUserDefaultsKey = @"signallingPluginUrl";
 - (void)reset
 {
     _peerConnection = nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kActiveRTCPeerConnectionChangedNotification object:nil userInfo:nil];
     _offer = nil;
 }
 
@@ -127,6 +128,7 @@ NSString * const kSignallingPluginUrlUserDefaultsKey = @"signallingPluginUrl";
     };
     RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatoryConstraints optionalConstraints:nil];
     _peerConnection = [factory peerConnectionWithConfiguration:rtcConfiguration constraints:constraints delegate:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kActiveRTCPeerConnectionChangedNotification object:_peerConnection userInfo:nil];
     NSString *sdp = [_offer objectForKey:@"sdp"];
     RTCSessionDescription *offerDescription = [[RTCSessionDescription alloc] initWithType:RTCSdpTypeOffer sdp:sdp];
     __unsafe_unretained typeof(self) weakSelf = self;

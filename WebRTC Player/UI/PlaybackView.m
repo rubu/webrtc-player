@@ -5,6 +5,7 @@
 {
     PlaybackViewController *_playbackViewController;
 }
+
 -(void)initialize
 {
     _playbackViewController = [[PlaybackViewController alloc] initWithNibName:@"PlaybackViewController" bundle:[NSBundle mainBundle]];

@@ -9,6 +9,8 @@
 #import <MetalKit/MetalKit.h>
 #import <WebRTC/WebRTC.h>
 
+static NSString * const kActiveRTCPeerConnectionChangedNotification = @"activeRTCPeerConnectionChanged";
+
 @interface PlaybackViewController : NSViewController<MTKViewDelegate, RTCPeerConnectionDelegate, RTCRtpReceiverDelegate, NSComboBoxDataSource, NSComboBoxDelegate, NSTextFieldDelegate>
 @property (weak) IBOutlet NSTextField *urlTextField;
 @property (weak) IBOutlet NSButton *playButton;

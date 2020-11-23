@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Metric" representedClassName="Metric" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Report" representedClassName="Report" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isLeaf" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="Report" positionX="-409.73046875" positionY="-2.375" width="128" height="73"/>
+        <element name="Metric" positionX="-227.3125" positionY="14.8046875" width="128" height="73"/>
+    </elements>
+</model>
